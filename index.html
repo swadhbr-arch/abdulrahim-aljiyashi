@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>عبدالرحيم الجياشي الشمري | تعريف شخصي</title>
-<meta name="description" content="الصفحة التعريفية الرسمية لعبدالرحيم الجياشي الشمري، ابن الشيخ عبدالأمير جلاب عبدالخضر الجياشي الشمري، ممثل عشائر البوجياش الشمرية في نينوى." />
+<title>الشيخ عبدالأمير الجياشي الشمري | ممثل عشائر البوجياش</title>
+<meta name="description" content="الصفحة الرسمية للشيخ عبدالأمير جلاب عبدالخضر الجياشي الشمري، ممثل عشائر البوجياش الشمرية في محافظة نينوى." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,7 +111,7 @@
     cursor:pointer;
   }
 
-  /* ============ قسم البطل ============ */
+  /* ============ قسم البطل (الواجهة) ============ */
   .hero{
     min-height:100vh;
     display:flex;
@@ -276,6 +276,7 @@
     font-weight:700;
     font-size:1.15rem;
     z-index:2;
+    text-align: center;
   }
 
   .portrait .portrait-role{
@@ -283,6 +284,7 @@
     font-size:.82rem;
     letter-spacing:1px;
     z-index:2;
+    text-align: center;
   }
 
   /* ============ الأقسام العامة ============ */
@@ -326,7 +328,7 @@
     margin:16px auto 0;
   }
 
-  /* عني */
+  /* نبذة */
   .about-grid{
     display:grid;
     grid-template-columns:1.2fr .8fr;
@@ -381,77 +383,23 @@
 
   .stat .lbl{font-size:.85rem;color:var(--muted);font-weight:500;}
 
-  /* عن الوالد */
-  .father-card{
-    background:linear-gradient(160deg,var(--navy),var(--navy-2));
-    border-radius:var(--radius);
-    padding:60px;
-    position:relative;
-    overflow:hidden;
-    color:var(--white);
-    box-shadow:0 30px 70px rgba(15,28,46,.3);
+  /* قسم الأخبار (تلجرام) */
+  .news-section {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(200,164,92,.2);
+    max-width: 700px;
+    margin: 0 auto;
   }
-
-  .father-card::before{
-    content:'';
-    position:absolute;
-    top:-80px;left:-80px;
-    width:260px;height:260px;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(200,164,92,.25),transparent 70%);
-  }
-
-  .father-card::after{
-    content:'';
-    position:absolute;
-    bottom:-100px;right:-60px;
-    width:300px;height:300px;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(200,164,92,.12),transparent 70%);
-  }
-
-  .father-inner{
-    position:relative;
-    z-index:2;
-    display:grid;
-    grid-template-columns:auto 1fr;
-    gap:40px;
-    align-items:center;
-  }
-
-  .father-emblem{
-    width:150px;height:150px;
-    border-radius:50%;
-    border:2px solid rgba(200,164,92,.5);
-    display:grid;place-items:center;
-    background:rgba(200,164,92,.08);
-    position:relative;
-  }
-
-  .father-emblem svg{width:80px;height:80px;stroke:var(--gold);fill:none;stroke-width:1.4;}
-
-  .father-content h3{
-    font-size:1.9rem;
-    font-weight:800;
-    margin-bottom:6px;
-  }
-
-  .father-content h3 span{color:var(--gold-light);}
-
-  .father-content .role{
-    color:var(--gold);
-    font-weight:600;
-    letter-spacing:1px;
-    font-size:.95rem;
-    margin-bottom:18px;
-    display:inline-block;
-  }
-
-  .father-content p{
-    color:#c2ccd8;
-    margin-bottom:14px;
-    font-size:1.02rem;
-    max-width:640px;
+  
+  .news-section .telegram-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-direction: column;
+    gap: 20px;
   }
 
   /* القيم */
@@ -486,23 +434,6 @@
   .value-card h4{font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:10px;}
 
   .value-card p{color:var(--muted);font-size:.95rem;}
-
-  /* قسم الأخبار (تلجرام) */
-  .news-section {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 30px;
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(200,164,92,.2);
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  
-  .news-section .telegram-wrap {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
 
   /* تواصل */
   .contact{
@@ -581,9 +512,6 @@
     .hero-card{order:-1;}
     .portrait{width:280px;height:330px;}
     .about-grid{grid-template-columns:1fr;}
-    .father-inner{grid-template-columns:1fr;text-align:center;justify-items:center;}
-    .father-content p{margin-inline:auto;}
-    .father-card{padding:44px 30px;}
     .hero-text h1{font-size:2.4rem;}
   }
 
@@ -615,86 +543,85 @@
 <header>
   <div class="brand">
     <div class="monogram">ع</div>
-    <div>عبدالرحيم الجياشي الشمري</div>
+    <div>الشيخ عبدالأمير الجياشي</div>
   </div>
   <nav>
     <ul id="navList">
       <li><a href="#home">الرئيسية</a></li>
-      <li><a href="#about">نبذة عني</a></li>
-      <li><a href="#father">عن الوالد</a></li>
-      <li><a href="#news">الأخبار</a></li>
-      <li><a href="#values">القيم</a></li>
-      <li><a href="#contact">تواصل</a></li>
+      <li><a href="#about">نبذة عن الشيخ</a></li>
+      <li><a href="#news">الأخبار والمنشورات</a></li>
+      <li><a href="#values">المبادئ</a></li>
+      <li><a href="#contact">التواصل</a></li>
     </ul>
   </nav>
   <button class="menu-btn" id="menuBtn" aria-label="القائمة">☰</button>
 </header>
 
-<!-- ================= قسم البطل ================= -->
+<!-- ================= قسم البطل (الواجهة) ================= -->
 <section class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-text">
-      <span class="subtitle">تعريف شخصي</span>
-      <h1>عبدالرحيم <span>الجياشي</span> الشمري</h1>
+      <span class="subtitle">الصفحة الرسمية</span>
+      <h1>الشيخ عبدالأمير <span>الجياشي</span> الشمري</h1>
       <p class="lead">
-        ابن الشيخ عبدالأمير جلاب عبدالخضر الجياشي الشمري، ممثل عشائر البوجياش الشمرية في نينوى.
-        أؤمن أن الأصل الطيّب يُبنى عليه، وأن الكلمة الصادقة والموقف المشرف هما أثمن ما يتركه الإنسان.
+        ممثل عشائر البوجياش الشمرية في محافظة نينوى. 
+        قامة عشائرية واجتماعية تسعى لخدمة أبناء العشيرة، ولمّ الشمل، وترسيخ قيم الشهامة والأصالة.
       </p>
       <div class="hero-badges">
-        <span class="badge">عشائر البوجياش الشمرية</span>
+        <span class="badge">ممثل عشائر البوجياش</span>
         <span class="badge">نينوى — العراق</span>
-        <span class="badge">قيمٌ عشائرية أصيلة</span>
+        <span class="badge">قيادة ومسؤولية</span>
       </div>
       <div class="hero-actions">
         <a href="#about" class="btn btn-primary">
-          تعرّف عليّ
+          السيرة والمسيرة
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#contact" class="btn btn-outline">تواصل معي</a>
+        <a href="#contact" class="btn btn-outline">للتواصل</a>
       </div>
     </div>
 
     <div class="hero-card">
       <div class="portrait">
         <div class="initial">ع</div>
-        <div class="portrait-name">عبدالرحيم الجياشي الشمري</div>
-        <div class="portrait-role">نينوى — العراق</div>
+        <div class="portrait-name">الشيخ عبدالأمير جلاب عبدالخضر الجياشي الشمري</div>
+        <div class="portrait-role">ممثل عشائر البوجياش في نينوى</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= نبذة عني ================= -->
+<!-- ================= نبذة عن الشيخ ================= -->
 <section class="content" id="about">
   <div class="section-head">
-    <div class="eyebrow">About Me</div>
-    <h2>نبذة عني</h2>
-    <p>لمحة موجزة عن شخصي وبيئتي التي نشأت فيها.</p>
+    <div class="eyebrow">About the Sheikh</div>
+    <h2>نبذة ومسيرة</h2>
+    <p>لمحة عن الدور العشائري والاجتماعي للشيخ عبدالأمير الجياشي.</p>
   </div>
 
   <div class="about-grid">
     <div class="about-text">
       <p>
-        أنا <strong>عبدالرحيم الجياشي الشمري</strong>، من أبناء عشائر البوجياش الشمرية في محافظة نينوى،
-        نشأت في بيتٍ يحمل إرثاً عشائرياً عريقاً وقيَماً راسخة في الشهامة والكرم والوفاء بالعهد.
+        يُعد الشيخ <strong>عبدالأمير جلاب عبدالخضر الجياشي الشمري</strong>، ممثل عشائر البوجياش الشمرية في محافظة نينوى، 
+        من الشخصيات العشائرية والاجتماعية البارزة التي تحملت مسؤولية تمثيل العشيرة والدفاع عن مصالحها.
       </p>
       <p>
-        تربّيـت على يد والدي الشيخ <strong>عبدالأمير جلاب عبدالخضر الجياشي الشمري</strong>، ممثل عشائر البوجياش الشمرية في نينوى،
-        وتعلّمت منه أن القيادة مسؤولية قبل أن تكون مكانة، وأن خدمة الناس والوقوف معهم هي أصل الرجال.
+        عُرف عنه الحكمة والاتزان في معالجة الأمور، وله مساعٍ حثيثة في <strong>الإصلاح بين الناس</strong>، 
+        ولمّ الشمل، وحل النزاعات بالطرق الأخلاقية التي تحفظ الدماء والأعراض وتصون السلم الأهلي.
       </p>
       <p>
-        أحرص على أن أكون امتداداً صادقاً لهذا الإرث، وأن أسهم في خدمة مجتمعي وترسيخ قيم
-        التلاحم الاجتماعي والتعايش واحترام التقاليد الأصيلة.
+        يمثل الشيخ امتداداً لإرث عريق من القيادات العشائرية التي وضعت خدمة المجتمع ومساعدة المحتاج 
+        والوقوف مع المظلوم في مقدمة أولوياتها.
       </p>
       <div class="quote">
-        «الرجال تُعرف بالأثر الذي تتركه، لا بالصوت الذي تُحدثه.»
+        «القائد الحقيقي هو من يخدم عشيرته ويحفظ دماء أبنائها ويلمّ شملهم.»
       </div>
     </div>
 
     <div class="stats">
       <div class="stat">
         <div class="num">نينوى</div>
-        <div class="lbl">محل الإقامة</div>
+        <div class="lbl">مقر التمثيل</div>
       </div>
       <div class="stat">
         <div class="num">البوجياش</div>
@@ -702,45 +629,11 @@
       </div>
       <div class="stat">
         <div class="num">شمّر</div>
-        <div class="lbl">الجذر العشائري</div>
+        <div class="lbl">الجذر</div>
       </div>
       <div class="stat">
-        <div class="num">وفاء</div>
-        <div class="lbl">النهج والمسار</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= عن الوالد ================= -->
-<section class="content" id="father">
-  <div class="section-head">
-    <div class="eyebrow">My Father</div>
-    <h2>عن والدي</h2>
-    <p>قامة عشائرية وامتداد للإرث الاجتماعي في نينوى.</p>
-  </div>
-
-  <div class="father-card">
-    <div class="father-inner">
-      <div class="father-emblem">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 6.1 18.2l.9-5.5-4-3.9 5.5-.8L12 3z"/>
-        </svg>
-      </div>
-      <div class="father-content">
-        <span class="role">ممثل عشائر البوجياش الشمرية في نينوى</span>
-        <h3>الشيخ <span>عبدالأمير جلاب عبدالخضر الجياشي الشمري</span></h3>
-        <p>
-          والدي الشيخ عبدالأمير جلاب عبدالخضر الجياشي الشمري، ممثل عشائر البوجياش الشمرية في محافظة نينوى،
-          شخصية عشائرية معروفة حملت على عاتقها مسؤولية تمثيل العشيرة ورعاية شؤونها.
-        </p>
-        <p>
-          عُرف عنه الحكمة في معالجة الأمور، ومساعيه في الإصلاح بين الناس،
-          وحرصه على جمع الكلمة وترسيخ قيم التلاحم الاجتماعي بين أبناء المنطقة.
-        </p>
-        <p>
-          هو قدوتي الأولى في تحمّل المسؤولية، وفي أن يكون الإنسان سنداً لعشيرته ومجتمعه.
-        </p>
+        <div class="num">إصلاح</div>
+        <div class="lbl">النهج</div>
       </div>
     </div>
   </div>
@@ -750,17 +643,19 @@
 <section class="content" id="news">
   <div class="section-head">
     <div class="eyebrow">News & Updates</div>
-    <h2>أحدث الأخبار والمنشورات</h2>
-    <p>تابع آخر المستجدات والفعاليات من خلال قناتنا على تلجرام.</p>
+    <h2>المنشورات والأخبار</h2>
+    <p>تابع آخر الأخبار والمستجدات والفعاليات الخاصة بالشيخ والعشيرة عبر قناة تلجرام.</p>
   </div>
 
   <div class="news-section">
     <div class="telegram-wrap">
-      <!-- كود تلجرام الذي قمت بإعداده -->
+      <!-- كود المنشور الأول -->
       <script async src="https://telegram.org/js/telegram-widget.js?24" data-telegram-post="x_adw/46" data-width="100%" data-color="CA9C0E" data-dark-color="F0B138"></script>
+      
+      <!-- إذا أردت إضافة منشور آخر مستقبلاً، ضع الكود الجديد هنا -->
     </div>
-    <div style="text-align: center; margin-top: 25px;">
-       <a href="https://t.me/x_adw" target="_blank" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">
+    <div style="text-align: center; margin-top: 30px;">
+       <a href="https://t.me/x_adw" target="_blank" class="btn btn-primary" style="padding: 12px 30px; font-size: 0.95rem;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           متابعة القناة على تلجرام
        </a>
@@ -768,12 +663,12 @@
   </div>
 </section>
 
-<!-- ================= القيم ================= -->
+<!-- ================= المبادئ والقيم ================= -->
 <section class="content" id="values">
   <div class="section-head">
     <div class="eyebrow">Values</div>
-    <h2>قيمي ومبادئي</h2>
-    <p>أسسٌ أتّخذها نهجاً في حياتي وتعاملاتي.</p>
+    <h2>المبادئ والنهج</h2>
+    <p>أسسٌ راسخة يسير عليها الشيخ في قيادته وخدمته للعشيرة.</p>
   </div>
 
   <div class="values">
@@ -781,32 +676,32 @@
       <div class="value-icon">
         <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg>
       </div>
-      <h4>الوفاء</h4>
-      <p>الوفاء للأصل والعشيرة والأهل والعهد، فهو أساس العلاقات الإنسانية الصادقة.</p>
+      <h4>الوفاء للأصل</h4>
+      <p>الاعتزاز بالجذور العشائرية والقيم العربية الأصيلة، والوفاء للعهود والمواثيق.</p>
     </div>
 
     <div class="value-card">
       <div class="value-icon">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
-      <h4>الاحترام والتلاحم</h4>
-      <p>احترام الكبير ورحمة الصغير، وتعزيز أواصر الأخوّة والتعايش في المجتمع.</p>
+      <h4>لمّ الشمل</h4>
+      <p>السعي الدائم لجمع الكلمة، ونبذ الفرقة، وتعزيز أواصر الأخوة بين أبناء العشيرة والمجتمع.</p>
     </div>
 
     <div class="value-card">
       <div class="value-icon">
         <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
       </div>
-      <h4>المسؤولية</h4>
-      <p>تحمّل المسؤولية تجاه المجتمع والعائلة، والسعي لترك أثر إيجابي في كل موقف.</p>
+      <h4>الإصلاح</h4>
+      <p>الوقوف بكل حكمة واقتدار لإصلاح ذات البين وحل الخلافات بالطرق السلمية والأخلاقية.</p>
     </div>
 
     <div class="value-card">
       <div class="value-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7l3-7z"/></svg>
       </div>
-      <h4>الأصالة</h4>
-      <p>الاعتزاز بالتقاليد العشائرية الأصيلة، وصون الإرث الذي تركه الأجداد للأجيال.</p>
+      <h4>خدمة المجتمع</h4>
+      <p>الوقوف مع أبناء العشيرة والمحتاجين، وتقديم الدعم والمساعدة في مختلف الظروف.</p>
     </div>
   </div>
 </section>
@@ -815,24 +710,24 @@
 <section class="content" id="contact">
   <div class="contact">
     <div class="eyebrow" style="color:var(--gold);font-weight:700;letter-spacing:3px;font-size:.8rem;margin-bottom:12px;">Contact</div>
-    <h2>تواصل معي</h2>
-    <p>يمكنك التواصل معي عبر القنوات التالية، وسأكون سعيداً بالرد عليك.</p>
+    <h2>للتواصل</h2>
+    <p>لأي استفسار، أو قضايا عشائرية، أو للتواصل المباشر مع مكتب الشيخ عبدالأمير الجياشي.</p>
     <div class="contact-links">
-      <a class="contact-link" href="mailto:example@email.com">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
-        البريد الإلكتروني
-      </a>
       <a class="contact-link" href="https://wa.me/9640000000000" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 01-12.6 7.5L3 21l2-5.4A8.5 8.5 0 1121 11.5z"/></svg>
         واتساب
       </a>
+      <a class="contact-link" href="https://t.me/x_adw" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        تلجرام
+      </a>
+      <a class="contact-link" href="mailto:example@email.com">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        البريد الإلكتروني
+      </a>
       <a class="contact-link" href="#" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
         فيسبوك
-      </a>
-      <a class="contact-link" href="#" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-        إنستغرام
       </a>
     </div>
   </div>
@@ -840,9 +735,9 @@
 
 <!-- ================= الفوتر ================= -->
 <footer>
-  © <span id="year"></span> — جميع الحقوق محفوظة | <strong>عبدالرحيم الجياشي الشمري</strong>
+  © <span id="year"></span> — جميع الحقوق محفوظة | <strong>الشيخ عبدالأمير جلاب عبدالخضر الجياشي الشمري</strong>
   <br>
-  ابن الشيخ عبدالأمير جلاب عبدالخضر الجياشي الشمري — ممثل عشائر البوجياش الشمرية في نينوى
+  ممثل عشائر البوجياش الشمرية في محافظة نينوى
 </footer>
 
 <script>
