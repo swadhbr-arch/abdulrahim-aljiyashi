@@ -145,7 +145,6 @@
     overflow:hidden;
   }
 
-  /* تأثير الجزيئات المتحركة */
   #particles-js{position:absolute; inset:0; z-index:1;}
 
   .hero-inner{
@@ -239,7 +238,7 @@
 
   .btn-outline:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-5px);background:rgba(200,164,92,.1);}
 
-  /* بطاقة الصورة */
+  /* بطاقة الصورة الشخصية */
   .hero-card{display:flex; justify-content:center;}
 
   .portrait{
@@ -264,8 +263,22 @@
     border-radius:50%;
     border:1px dashed rgba(200,164,92,.5);
     animation:spin 40s linear infinite;
+    z-index:1;
   }
 
+  /* تنسيق الصورة الشخصية المرفوعة */
+  .profile-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--gold);
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    background-color: var(--navy);
+  }
+
+  /* التنسيق الافتراضي (حرف ع) في حال عدم وجود صورة */
   .portrait .initial{
     width:150px; height:150px;
     border-radius:50%;
@@ -306,7 +319,6 @@
     margin:0 auto;
   }
 
-  /* تأثير الظهور عند التمرير */
   .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -399,15 +411,36 @@
 
   .stat:hover{transform:translateY(-10px); box-shadow:0 25px 50px rgba(10,19,32,.12); border-color:rgba(200,164,92,.4);}
 
-  .stat .num{
-    font-size:2.2rem;
-    font-weight:800;
-    color:var(--gold);
-    line-height:1.2;
-    margin-bottom:5px;
-  }
+  .stat .num{font-size:2.2rem; font-weight:800; color:var(--gold); line-height:1.2; margin-bottom:5px;}
 
   .stat .lbl{font-size:0.9rem; color:var(--muted); font-weight:600;}
+
+  /* ============ معرض الصور ============ */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
+  .gallery-item {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(10,19,32,.1);
+    height: 300px;
+    background: #e9ecef;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.1);
+  }
 
   /* قسم الأخبار */
   .news-section {
@@ -562,8 +595,10 @@
     .section-head h2{font-size:2rem;}
     .portrait{width:260px; height:320px;}
     .portrait .initial{width:110px; height:110px; font-size:3.5rem;}
+    .profile-img {width: 130px; height: 130px;}
     .news-section{padding:20px;}
     .contact{border-radius:20px; padding:60px 5%;}
+    .gallery-item {height: 250px;}
   }
 </style>
 </head>
@@ -584,6 +619,7 @@
     <ul id="navList">
       <li><a href="#home">الرئيسية</a></li>
       <li><a href="#about">نبذة عنه</a></li>
+      <li><a href="#gallery">معرض الصور</a></li>
       <li><a href="#news">المنشورات</a></li>
       <li><a href="#values">المبادئ</a></li>
       <li><a href="#contact">التواصل</a></li>
@@ -619,7 +655,12 @@
 
     <div class="hero-card">
       <div class="portrait">
-        <div class="initial">ع</div>
+        <!-- الحرف الافتراضي (يختفي تلقائياً إذا وجد صورة profile.jpg) -->
+        <div class="initial" id="defaultInitial">ع</div>
+        
+        <!-- الصورة الشخصية -->
+        <img src="profile.jpg" alt="عبدالأمير الجياشي" class="profile-img" id="profileImage" style="display: none;">
+        
         <div class="portrait-name">عبدالأمير جلاب عبدالخضر الجياشي الشمري</div>
         <div class="portrait-role">ممثل عشائر البوجياش في نينوى</div>
       </div>
@@ -675,6 +716,32 @@
   </div>
 </section>
 
+<!-- ================= معرض الصور ================= -->
+<section class="content reveal" id="gallery">
+  <div class="section-head">
+    <div class="eyebrow">Gallery</div>
+    <h2>معرض الصور</h2>
+    <p>لقطات من الفعاليات والمناسبات العشائرية.</p>
+  </div>
+
+  <div class="gallery-grid">
+    <!-- الصورة الأولى -->
+    <div class="gallery-item" id="galleryItem1" style="display:none;">
+      <img src="photo1.jpg" alt="صورة فعالية 1" onerror="document.getElementById('galleryItem1').style.display='none'">
+    </div>
+    
+    <!-- الصورة الثانية -->
+    <div class="gallery-item" id="galleryItem2" style="display:none;">
+      <img src="photo2.jpg" alt="صورة فعالية 2" onerror="document.getElementById('galleryItem2').style.display='none'">
+    </div>
+
+    <!-- الصورة الثالثة -->
+    <div class="gallery-item" id="galleryItem3" style="display:none;">
+      <img src="photo3.jpg" alt="صورة فعالية 3" onerror="document.getElementById('galleryItem3').style.display='none'">
+    </div>
+  </div>
+</section>
+
 <!-- ================= قسم المنشورات ================= -->
 <section class="content reveal" id="news">
   <div class="section-head">
@@ -687,8 +754,6 @@
     <div class="telegram-wrap">
       <!-- كود المنشور الأول (تلجرام) -->
       <script async src="https://telegram.org/js/telegram-widget.js?24" data-telegram-post="x_adw/46" data-width="100%" data-color="CA9C0E" data-dark-color="F0B138"></script>
-      
-      <!-- يمكنك إضافة المزيد من المنشورات هنا مستقبلاً -->
     </div>
     <div style="text-align: center; margin-top: 35px;">
        <a href="https://t.me/x_adw" target="_blank" class="btn btn-primary" style="padding: 14px 36px; font-size: 1rem;">
@@ -793,7 +858,6 @@
   const navList = document.getElementById('navList');
   menuBtn.addEventListener('click', () => navList.classList.toggle('open'));
 
-  // إغلاق القائمة عند النقر على رابط
   document.querySelectorAll('#navList a').forEach(link => {
     link.addEventListener('click', () => navList.classList.remove('open'));
   });
@@ -810,7 +874,7 @@
     }
   });
 
-  // 5. تأثير الظهور عند التمرير (Scroll Reveal)
+  // 5. تأثير الظهور عند التمرير
   function reveal() {
     var reveals = document.querySelectorAll(".reveal");
     for (var i = 0; i < reveals.length; i++) {
@@ -823,9 +887,9 @@
     }
   }
   window.addEventListener("scroll", reveal);
-  reveal(); // تشغيلها مرة واحدة عند التحميل
+  reveal();
 
-  // 6. تفعيل خلفية الجزيئات المتحركة
+  // 6. خلفية الجزيئات المتحركة
   particlesJS("particles-js", {
     "particles": {
       "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
@@ -843,6 +907,41 @@
     },
     "retina_detect": true
   });
+
+  // 7. فحص ذكي للصور (لإظهارها فقط إذا تم رفعها)
+  function checkImage(imageId, containerId) {
+    var img = document.getElementById(imageId);
+    if (img) {
+      img.onload = function() {
+        // الصورة موجودة، أخفِ الحرف وأظهر الصورة
+        if(document.getElementById('defaultInitial')) {
+            document.getElementById('defaultInitial').style.display = 'none';
+        }
+        img.style.display = 'block';
+      }
+      img.onerror = function() {
+        // الصورة غير موجودة، أبقِ الحرف وأخفِ الصورة
+        img.style.display = 'none';
+      }
+    }
+  }
+  
+  // فحص الصورة الشخصية
+  var profileImg = document.getElementById('profileImage');
+  if (profileImg) {
+      profileImg.onload = function() {
+          document.getElementById('defaultInitial').style.display = 'none';
+          profileImg.style.display = 'block';
+      }
+  }
+
+  // فحص صور المعرض
+  document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.onload = function() {
+          this.parentElement.style.display = 'block';
+      }
+  });
+
 </script>
 </body>
 </html>
