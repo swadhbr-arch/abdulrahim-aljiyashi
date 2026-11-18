@@ -38,6 +38,17 @@
     overflow-x:hidden;
   }
 
+  /* ============ شريط تقدم القراءة ============ */
+  #progressBar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    width: 0%;
+    z-index: 1000;
+    transition: width 0.1s ease;
+  }
+
   /* ============ شاشة التحميل ============ */
   #preloader{
     position:fixed;
@@ -131,13 +142,38 @@
     cursor:pointer;
   }
 
+  /* ============ شريط الأخبار المتحرك ============ */
+  .ticker-wrap {
+    position: fixed;
+    top: 89px;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--gold);
+    color: var(--navy);
+    padding: 6px 0;
+    z-index: 99;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .ticker {
+    display: inline-block;
+    white-space: nowrap;
+    padding-right: 100%;
+    animation: ticker 25s linear infinite;
+  }
+  .ticker:hover { animation-play-state: paused; }
+  @keyframes ticker {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(100%, 0, 0); }
+  }
+
   /* ============ قسم الواجهة (Hero) ============ */
   .hero{
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:160px 6% 100px;
+    padding:200px 6% 100px;
     background: radial-gradient(circle at 15% 30%, rgba(200,164,92,.15), transparent 50%),
                 radial-gradient(circle at 85% 70%, rgba(200,164,92,.1), transparent 50%),
                 linear-gradient(160deg,var(--navy) 0%, var(--navy-2) 100%);
@@ -225,9 +261,22 @@
     background:linear-gradient(135deg,var(--gold),#9a7633);
     color:var(--navy);
     box-shadow:0 15px 35px rgba(200,164,92,.3);
+    position: relative;
+    overflow: hidden;
   }
 
-  .btn-primary:hover{transform:translateY(-5px);box-shadow:0 20px 45px rgba(200,164,92,.5);}
+  /* تأثير التوهج للزر */
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.5s;
+  }
+  .btn-primary:hover::before { left: 100%; }
+
+  .btn-primary:hover{transform:translateY(-5px);box-shadow:0 20px 45px rgba(200,164,92,.6);}
 
   .btn-outline{
     background:rgba(255,255,255,.05);
@@ -266,7 +315,6 @@
     z-index:1;
   }
 
-  /* تنسيق الصورة الشخصية المرفوعة */
   .profile-img {
     width: 180px;
     height: 180px;
@@ -278,7 +326,6 @@
     background-color: var(--navy);
   }
 
-  /* التنسيق الافتراضي (حرف ع) في حال عدم وجود صورة */
   .portrait .initial{
     width:150px; height:150px;
     border-radius:50%;
@@ -393,6 +440,7 @@
     line-height:1.7;
   }
 
+  /* عدادات الاحصائيات */
   .stats{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -429,6 +477,7 @@
     box-shadow: 0 15px 40px rgba(10,19,32,.1);
     height: 300px;
     background: #e9ecef;
+    cursor: pointer;
   }
 
   .gallery-item img {
@@ -440,6 +489,38 @@
 
   .gallery-item:hover img {
     transform: scale(1.1);
+  }
+
+  /* نافذة عرض الصورة (Lightbox) */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(10,19,32,0.95);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .lightbox.show { display: flex; opacity: 1; }
+  .lightbox img {
+    max-width: 90%;
+    max-height: 85%;
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(200,164,92,0.3);
+    animation: zoomIn 0.4s ease;
+  }
+  @keyframes zoomIn { from { transform: scale(0.8); } to { transform: scale(1); } }
+  .lightbox-close {
+    position: absolute;
+    top: 30px; right: 40px;
+    color: var(--gold);
+    font-size: 40px;
+    cursor: pointer;
+    font-weight: bold;
   }
 
   /* قسم الأخبار */
@@ -551,6 +632,24 @@
 
   .contact-link svg{width:22px; height:22px; stroke:var(--gold); fill:none; stroke-width:1.8;}
 
+  /* زر العودة للأعلى */
+  #backToTop {
+    position: fixed;
+    bottom: 30px; left: 30px;
+    width: 50px; height: 50px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 999;
+    transition: var(--transition);
+  }
+  #backToTop:hover { background: var(--gold-light); transform: scale(1.1); }
+
   /* الفوتر */
   footer{
     text-align:center;
@@ -577,9 +676,10 @@
   }
 
   @media(max-width:680px){
+    .ticker-wrap { top: 78px; font-size: 0.8rem; }
     nav ul{
       position:fixed;
-      top:88px; right:0; left:0;
+      top:110px; right:0; left:0;
       flex-direction:column;
       background:rgba(10,19,32,.98);
       padding:40px;
@@ -599,10 +699,14 @@
     .news-section{padding:20px;}
     .contact{border-radius:20px; padding:60px 5%;}
     .gallery-item {height: 250px;}
+    #backToTop { bottom: 20px; left: 20px; width: 45px; height: 45px; }
   }
 </style>
 </head>
 <body>
+
+<!-- شريط تقدم القراءة -->
+<div id="progressBar"></div>
 
 <!-- شاشة التحميل -->
 <div id="preloader">
@@ -627,6 +731,13 @@
   </nav>
   <button class="menu-btn" id="menuBtn" aria-label="القائمة">☰</button>
 </header>
+
+<!-- شريط الأخبار المتحرك -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    مرحباً بكم في الصفحة الرسمية لعبدالأمير الجياشي الشمري، ممثل عشائر البوجياش في نينوى. تابعوا أحدث الأخبار والمنشورات في قسم المنشورات.
+  </div>
+</div>
 
 <!-- ================= قسم الواجهة ================= -->
 <section class="hero" id="home">
@@ -655,12 +766,8 @@
 
     <div class="hero-card">
       <div class="portrait">
-        <!-- الحرف الافتراضي (يختفي تلقائياً إذا وجد صورة profile.jpg) -->
         <div class="initial" id="defaultInitial">ع</div>
-        
-        <!-- الصورة الشخصية -->
         <img src="profile.jpg" alt="عبدالأمير الجياشي" class="profile-img" id="profileImage" style="display: none;">
-        
         <div class="portrait-name">عبدالأمير جلاب عبدالخضر الجياشي الشمري</div>
         <div class="portrait-role">ممثل عشائر البوجياش في نينوى</div>
       </div>
@@ -695,10 +802,11 @@
       </div>
     </div>
 
+    <!-- عدادات متحركة -->
     <div class="stats">
       <div class="stat">
-        <div class="num">نينوى</div>
-        <div class="lbl">مقر التمثيل</div>
+        <div class="num" data-target="100" data-suffix="%">0</div>
+        <div class="lbl">الالتزام والوفاء</div>
       </div>
       <div class="stat">
         <div class="num">البوجياش</div>
@@ -706,11 +814,11 @@
       </div>
       <div class="stat">
         <div class="num">شمّر</div>
-        <div class="lbl">الجذر</div>
+        <div class="lbl">الجذر العريق</div>
       </div>
       <div class="stat">
-        <div class="num">إصلاح</div>
-        <div class="lbl">النهج</div>
+        <div class="num">نينوى</div>
+        <div class="lbl">مقر التمثيل</div>
       </div>
     </div>
   </div>
@@ -721,26 +829,27 @@
   <div class="section-head">
     <div class="eyebrow">Gallery</div>
     <h2>معرض الصور</h2>
-    <p>لقطات من الفعاليات والمناسبات العشائرية.</p>
+    <p>لقطات من الفعاليات والمناسبات العشائرية. (اضغط على الصورة لتكبيرها)</p>
   </div>
 
   <div class="gallery-grid">
-    <!-- الصورة الأولى -->
     <div class="gallery-item" id="galleryItem1" style="display:none;">
-      <img src="photo1.jpg" alt="صورة فعالية 1" onerror="document.getElementById('galleryItem1').style.display='none'">
+      <img src="photo1.jpg" alt="صورة فعالية 1" onclick="openLightbox(this.src)" onerror="document.getElementById('galleryItem1').style.display='none'">
     </div>
-    
-    <!-- الصورة الثانية -->
     <div class="gallery-item" id="galleryItem2" style="display:none;">
-      <img src="photo2.jpg" alt="صورة فعالية 2" onerror="document.getElementById('galleryItem2').style.display='none'">
+      <img src="photo2.jpg" alt="صورة فعالية 2" onclick="openLightbox(this.src)" onerror="document.getElementById('galleryItem2').style.display='none'">
     </div>
-
-    <!-- الصورة الثالثة -->
     <div class="gallery-item" id="galleryItem3" style="display:none;">
-      <img src="photo3.jpg" alt="صورة فعالية 3" onerror="document.getElementById('galleryItem3').style.display='none'">
+      <img src="photo3.jpg" alt="صورة فعالية 3" onclick="openLightbox(this.src)" onerror="document.getElementById('galleryItem3').style.display='none'">
     </div>
   </div>
 </section>
+
+<!-- نافذة عرض الصور (Lightbox) -->
+<div id="imageLightbox" class="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightboxImg" src="" alt="صورة مكبرة">
+</div>
 
 <!-- ================= قسم المنشورات ================= -->
 <section class="content reveal" id="news">
@@ -752,7 +861,6 @@
 
   <div class="news-section">
     <div class="telegram-wrap">
-      <!-- كود المنشور الأول (تلجرام) -->
       <script async src="https://telegram.org/js/telegram-widget.js?24" data-telegram-post="x_adw/46" data-width="100%" data-color="CA9C0E" data-dark-color="F0B138"></script>
     </div>
     <div style="text-align: center; margin-top: 35px;">
@@ -774,33 +882,22 @@
 
   <div class="values">
     <div class="value-card">
-      <div class="value-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg>
-      </div>
+      <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg></div>
       <h4>الوفاء للأصل</h4>
       <p>الاعتزاز بالجذور العشائرية والقيم العربية الأصيلة، والوفاء للعهود والمواثيق.</p>
     </div>
-
     <div class="value-card">
-      <div class="value-icon">
-        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      </div>
+      <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
       <h4>لمّ الشمل</h4>
       <p>السعي الدائم لجمع الكلمة، ونبذ الفرقة، وتعزيز أواصر الأخوة بين أبناء العشيرة والمجتمع.</p>
     </div>
-
     <div class="value-card">
-      <div class="value-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-      </div>
+      <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
       <h4>الإصلاح</h4>
       <p>الوقوف بكل حكمة واقتدار لإصلاح ذات البين وحل الخلافات بالطرق السلمية والأخلاقية.</p>
     </div>
-
     <div class="value-card">
-      <div class="value-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7l3-7z"/></svg>
-      </div>
+      <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7l3-7z"/></svg></div>
       <h4>خدمة المجتمع</h4>
       <p>الوقوف مع أبناء العشيرة والمحتاجين، وتقديم الدعم والمساعدة في مختلف الظروف.</p>
     </div>
@@ -815,20 +912,16 @@
     <p>لأي استفسار، أو قضايا عشائرية، أو للتواصل المباشر مع مكتب ممثل العشائر.</p>
     <div class="contact-links">
       <a class="contact-link" href="https://wa.me/9640000000000" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 01-12.6 7.5L3 21l2-5.4A8.5 8.5 0 1121 11.5z"/></svg>
-        واتساب
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 01-12.6 7.5L3 21l2-5.4A8.5 8.5 0 1121 11.5z"/></svg> واتساب
       </a>
       <a class="contact-link" href="https://t.me/x_adw" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        تلجرام
+        <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> تلجرام
       </a>
       <a class="contact-link" href="mailto:example@email.com">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
-        البريد الإلكتروني
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg> البريد الإلكتروني
       </a>
       <a class="contact-link" href="#" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-        فيسبوك
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> فيسبوك
       </a>
     </div>
   </div>
@@ -837,15 +930,17 @@
 <!-- ================= الفوتر ================= -->
 <footer>
   © <span id="year"></span> — جميع الحقوق محفوظة | <strong>عبدالأمير جلاب عبدالخضر الجياشي الشمري</strong>
-  <br>
-  ممثل عشائر البوجياش الشمرية في محافظة نينوى
+  <br> ممثل عشائر البوجياش الشمرية في محافظة نينوى
 </footer>
+
+<!-- زر العودة للأعلى -->
+<button id="backToTop" title="العودة للأعلى">↑</button>
 
 <!-- مكتبة الجزيئات للخلفية -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
-  // 1. إخفاء شاشة التحميل
+  // 1. شاشة التحميل
   window.addEventListener('load', () => {
     document.getElementById('preloader').classList.add('hidden');
   });
@@ -857,14 +952,17 @@
   const menuBtn = document.getElementById('menuBtn');
   const navList = document.getElementById('navList');
   menuBtn.addEventListener('click', () => navList.classList.toggle('open'));
-
   document.querySelectorAll('#navList a').forEach(link => {
     link.addEventListener('click', () => navList.classList.remove('open'));
   });
 
-  // 4. تأثير الهيدر عند التمرير
+  // 4. تأثير الهيدر وشريط التقدم وزر الأعلى
   const header = document.querySelector('header');
+  const progressBar = document.getElementById('progressBar');
+  const backToTopBtn = document.getElementById('backToTop');
+
   window.addEventListener('scroll', () => {
+    // الهيدر
     if(window.scrollY > 50){
       header.style.padding = '12px 6%';
       header.style.background = 'rgba(10,19,32,.98)';
@@ -872,6 +970,23 @@
       header.style.padding = '20px 6%';
       header.style.background = 'rgba(10,19,32,.85)';
     }
+
+    // شريط التقدم
+    let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrolled = (winScroll / height) * 100;
+    progressBar.style.width = scrolled + "%";
+
+    // زر العودة للأعلى
+    if (winScroll > 300) {
+      backToTopBtn.style.display = "block";
+    } else {
+      backToTopBtn.style.display = "none";
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   // 5. تأثير الظهور عند التمرير
@@ -889,7 +1004,37 @@
   window.addEventListener("scroll", reveal);
   reveal();
 
-  // 6. خلفية الجزيئات المتحركة
+  // 6. عدادات الأرقام المتحركة
+  let counted = false;
+  window.addEventListener('scroll', () => {
+    let statsSection = document.querySelector('.stats');
+    if (!statsSection) return;
+    let position = statsSection.getBoundingClientRect().top;
+    let screenPosition = window.innerHeight;
+    
+    if (position < screenPosition && !counted) {
+      counted = true;
+      let counters = document.querySelectorAll('.num[data-target]');
+      counters.forEach(counter => {
+        let target = +counter.getAttribute('data-target');
+        let suffix = counter.getAttribute('data-suffix') || '';
+        let count = 0;
+        let speed = target / 50; // سرعة العد
+        let updateCount = () => {
+          count += speed;
+          if (count < target) {
+            counter.innerText = Math.ceil(count) + suffix;
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.innerText = target + suffix;
+          }
+        };
+        updateCount();
+      });
+    }
+  });
+
+  // 7. خلفية الجزيئات
   particlesJS("particles-js", {
     "particles": {
       "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
@@ -908,25 +1053,22 @@
     "retina_detect": true
   });
 
-  // 7. فحص ذكي للصور (لإظهارها فقط إذا تم رفعها)
-  function checkImage(imageId, containerId) {
-    var img = document.getElementById(imageId);
-    if (img) {
-      img.onload = function() {
-        // الصورة موجودة، أخفِ الحرف وأظهر الصورة
-        if(document.getElementById('defaultInitial')) {
-            document.getElementById('defaultInitial').style.display = 'none';
-        }
-        img.style.display = 'block';
-      }
-      img.onerror = function() {
-        // الصورة غير موجودة، أبقِ الحرف وأخفِ الصورة
-        img.style.display = 'none';
-      }
-    }
+  // 8. معرض الصور (Lightbox)
+  function openLightbox(src) {
+    const lightbox = document.getElementById('imageLightbox');
+    const img = document.getElementById('lightboxImg');
+    img.src = src;
+    lightbox.classList.add('show');
+    document.body.style.overflow = 'hidden'; // منع التمرير
   }
-  
-  // فحص الصورة الشخصية
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('imageLightbox');
+    lightbox.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  // 9. التحقق من وجود الصور
   var profileImg = document.getElementById('profileImage');
   if (profileImg) {
       profileImg.onload = function() {
@@ -934,14 +1076,11 @@
           profileImg.style.display = 'block';
       }
   }
-
-  // فحص صور المعرض
   document.querySelectorAll('.gallery-item img').forEach(img => {
       img.onload = function() {
           this.parentElement.style.display = 'block';
       }
   });
-
 </script>
 </body>
 </html>
